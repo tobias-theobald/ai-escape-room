@@ -1,0 +1,15 @@
+{
+  "name": "ai-escape-room",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/bin/query.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "@triggi/native-exec": "^0.3.0"
+  }
+}

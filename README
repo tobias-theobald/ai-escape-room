@@ -1,0 +1,12 @@
+Watch an AI trying to escape a docker container by running commands in a terminal.
+
+Costs about 1.2 USD/minute for openai gpt-4o with the current throttling.
+
+Very unoptimized mess, but it works.
+
+## How to run
+
+* copy .env.example to .env and set the values.
+* Run `docker compose build` to build the image.
+* Run `docker compose up` to start the containers and watch it unfold. DO NOT RUN THIS IN DAEMON MDOE (-d) as you will not see the output and it will cost a lot of money.
+* Don't forget to `docker compose down` to get rid of the overlay filesystems.

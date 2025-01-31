@@ -1,0 +1,24 @@
+name: ai-escape-room
+
+services:
+  ai-proxy:
+    image: ai-escape-room/ai-proxy
+    build: ./containers/ai-proxy
+    networks:
+      - internal
+      - external
+    env_file:
+      - .env
+
+  escape-room:
+    image: ai-escape-room/escape-room
+    build: ./containers/escape-room
+    networks:
+      - internal
+    depends_on:
+      - ai-proxy
+
+networks:
+  internal:
+    internal: true
+  external: {}
