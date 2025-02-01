@@ -29,10 +29,15 @@ for (const toolCall of toolCalls ) {
     console.log('Arguments:', JSON.stringify(argsParsed, null, 2));
     const result = await runner(argsParsed);
     console.log('Result:', JSON.stringify(result, null, 2));
+    let compactStringifiedResult = JSON.stringify(result);
+    if (compactStringifiedResult.length > 1000000) {
+        console.log('Result is too long. Truncating to 1000000 characters.');
+        compactStringifiedResult = compactStringifiedResult.substring(0, 1000000);
+    }
     currentChatLog.push({
         role: "tool",
         tool_call_id: id,
-        content: JSON.stringify(result),
+        content: compactStringifiedResult,
     });
 }
 

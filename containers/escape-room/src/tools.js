@@ -18,7 +18,7 @@ export const tools = {
             },
             timeout: {
                 type: "number",
-                description: "The time in seconds to wait before terminating the command"
+                description: "The time in milliseconds to wait before terminating the command"
             },
         },
         runner: async (parameters) => {
@@ -34,6 +34,9 @@ export const tools = {
                 return {
                     error: e.message,
                     code: e.code,
+                    killed: e.killed,
+                    signal: e.signal,
+                    cmd: e.cmd,
                     stdout: e.stdout,
                     stderr: e.stderr,
                 };

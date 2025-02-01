@@ -16,6 +16,7 @@ if (!UPSTREAM_MODEL) {
     console.error('UPSTREAM_MODEL is not set');
     process.exit(1);
 }
+const DELAY = parseInt(process.env.DELAY || '2000');
 const VERBOSE = process.env.VERBOSE === 'true';
 
 const readRequestJsonBody = (req) => {
@@ -104,7 +105,7 @@ const handleRequest = async (req, res) => {
             console.log('\nUpstream response\n', JSON.stringify(JSON.parse(body), null, 2));
         }
 
-        await delay(2000);
+        await delay(DELAY);
 
         res.writeHead(200, {'Content-Type': 'application/json'});
         res.end(body);

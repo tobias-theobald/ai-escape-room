@@ -1,22 +1,38 @@
-name: ai-escape-room
-
+#name: ai-escape-room
+#
 services:
   ai-proxy:
-    image: ai-escape-room/ai-proxy
+    image: 127.0.0.1:5000/ai-escape-room/ai-proxy
     build: ./containers/ai-proxy
     networks:
       - internal
       - external
     env_file:
       - .env
+    environment:
+      - DELAY=2000
+    deploy:
+      placement:
+        constraints:
+          - node.hostname!=debian
 
   escape-room:
-    image: ai-escape-room/escape-room
+    image: 127.0.0.1:5000/ai-escape-room/escape-room
     build: ./containers/escape-room
+    cap_add:
+      - ALL
     networks:
       - internal
     depends_on:
       - ai-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      mode: replicated-job
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname==debian
 
 networks:
   internal:
